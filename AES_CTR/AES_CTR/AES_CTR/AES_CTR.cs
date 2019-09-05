@@ -93,6 +93,38 @@ namespace AES_CTR
 
 
             return result;
+        }       /// <summary>
+
+        /// <summary>
+        ///     Encripta un valor en AES_CTR
+        /// </summary>
+        /// <param name="data">Cadena de texto en Base64 a encriptar</param>
+        /// <param name="llave">Llave en claro</param>
+        /// <param name="resultado">Cadena de texto en Base64 obtenida del arreglo de bytes</param>
+        /// <returns> Cantidad de Bytes obtenido al encriptar</returns>       
+        public int Encripta(byte[] data, byte[] llave, out byte[] resultado) {
+
+            int result = -1;
+            byte[] iv = new byte[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+            resultado = null;
+            try
+            {
+                resultado = new byte[data.Length ];
+                
+                Aes128CounterMode am = new Aes128CounterMode(iv);
+                ICryptoTransform ict = am.CreateEncryptor(llave, null);
+                ict.TransformBlock(data, 0, resultado.Length, resultado, 0);
+
+                result = resultado.Length;
+
+            }
+            catch (Exception e)
+            {
+                resultado = Encoding.UTF8.GetBytes( e.Message);
+            }
+
+
+            return result;
         }
 
         /// <summary>
@@ -144,6 +176,37 @@ namespace AES_CTR
             catch (Exception e)
             {
                 resultado = e.Message;
+            }
+
+            return result;           
+        }/// <summary>
+        ///     Desencripta un valor en AES_CTR
+        /// </summary>
+        /// <param name="dataIn">Data Encriptada</param>
+        /// <param name="llave">Arreglo de bytes (32 bytes)</param>
+        /// <param name="resultado">Cadena de texto obtenida del arreglo de bytes</param>
+        /// <returns> Cantidad de Bytes obtenido al desencriptar </returns>
+        public int Desencripta(byte[] data, byte[] llave, out byte[] resultado) {
+
+            int result = -1;
+            byte[] iv = new byte[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+            resultado = null;
+            
+            try
+            {
+                resultado  = new byte[data.Length];
+                
+                Aes128CounterMode am = new Aes128CounterMode(iv);
+                ICryptoTransform ict = am.CreateDecryptor(llave, null);
+                ict.TransformBlock(data, 0, data.Length, resultado, 0);
+
+                                
+                result = resultado.Length;
+
+            }
+            catch (Exception e)
+            {
+                resultado = Encoding.UTF8.GetBytes( e.Message);
             }
 
             return result;           
