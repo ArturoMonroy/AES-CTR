@@ -6,7 +6,7 @@ using System.Text;
 using RGiesecke.DllExport;
 using System.Runtime.InteropServices;
 
-namespace AES_CTR
+namespace AES_CTR_NET
 {
 
     [ComVisible(true)]
