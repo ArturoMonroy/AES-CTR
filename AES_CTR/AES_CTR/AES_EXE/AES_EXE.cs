@@ -38,12 +38,12 @@ namespace AES_EXE
                 llave = args[2];
             }
             
-            if ( AES_CTR.AES_CTR.EncriptaNTS( textoAEncriptar, llave, out resultadoBase64  ) > 0 )
+            if ( AES_CTR_NET.AES_CTR.EncriptaNTS( textoAEncriptar, llave, out resultadoBase64  ) > 0 )
                 Console.WriteLine(resultadoBase64);
             else 
                 Console.WriteLine( string.Format("Error NO esperado {0} ", resultadoBase64) );            
             
-            if (AES_CTR.AES_CTR.DesencriptaNTS(resultadoBase64, llave, out resultadoBase64) > 0 )
+            if (AES_CTR_NET.AES_CTR.DesencriptaNTS(resultadoBase64, llave, out resultadoBase64) > 0 )
                 Console.WriteLine( resultadoBase64 + " ==> " + Encoding.UTF8.GetString( Convert.FromBase64String(resultadoBase64) ) );
             else
                 Console.WriteLine( string.Format("Error NO esperado el desencriptar {0}", resultadoBase64));
