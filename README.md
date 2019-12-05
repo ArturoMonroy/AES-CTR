@@ -35,7 +35,11 @@ _TCreaObjeto_CBC_PKC7      = procedure ( out AES_CBC_PKC7: IAES_CBC_PKC7); stdca
 ``` 
 ## Cargar DLL y metodo /Load DLL and function 
 ``` 
-_Handle_:= LoadLibrary('PinBlockDLL.dll');
+_Handle_:= LoadLibrary('AES_CTR.dll');
   if _Handle_ <> 0 then
-    _F_PINBlockDLL:= GetProcAddress(_Handle_, 'PINBlock');
+     
+  GetProcAddress(_Handle_, 'EncriptaNTS');  
+  GetProcAddress(_Handle_, 'DesencriptaNTS');
+  GetProcAddress(_Handle_, 'VersionNTS');
+  GetProcAddress(_Handle_, 'CreaObjeto');
 ``` 
