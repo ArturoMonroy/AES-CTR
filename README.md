@@ -1,5 +1,4 @@
-# AES-CTR
-AES CTR y AES CBC-PKC7 compatible con PKCS5Padding (Java)
+# AES CTR y AES CBC-PKC7 compatible con PKCS5Padding (Java)
 
 Obtiene una DLL y expone los metodos, al estilo de C++ stdcall (Pero mas sencillo ;)).
 
