@@ -13,7 +13,7 @@ Static methods, also can create a instance (using interface) to thread-safe use
 ### Delphi example
 
 ## vars and types
-
+``` 
 _TEncriptaNTS     = function  (const base64Data : PChar ; const llave : PChar; out base64Resultado : WideString ): Integer; stdcall;
 _TDesencriptaNTS  = function  (const base64Data : PChar;  const llave : PChar; out resultado : WideString ): Integer; stdcall;
 _TVersionNTS      = procedure ( out v : WideString ) ; stdcall;
@@ -32,9 +32,10 @@ IAES_CBC_PKC7 = interface(IUnknown)
 end;
 
 _TCreaObjeto_CBC_PKC7      = procedure ( out AES_CBC_PKC7: IAES_CBC_PKC7); stdcall;
-
+``` 
 ## Cargar DLL y metodo /Load DLL and function 
 ``` 
 _Handle_:= LoadLibrary('PinBlockDLL.dll');
   if _Handle_ <> 0 then
     _F_PINBlockDLL:= GetProcAddress(_Handle_, 'PINBlock');
+``` 
