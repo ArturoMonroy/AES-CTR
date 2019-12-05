@@ -12,9 +12,18 @@ namespace AES_CBC_PKC7
     public interface IAES_CBC_PKC7
     {
         [return: MarshalAs(UnmanagedType.I4)]
-        int Desencripta(string base64Data, string base64Llave, [MarshalAs(UnmanagedType.BStr)] out string base64Resultado);
-        [return: MarshalAs(UnmanagedType.I4)]
         int Encripta(string base64Data, string base64Llave, [MarshalAs(UnmanagedType.BStr)] out string base64Resultado);
+
+        [return: MarshalAs(UnmanagedType.I4)]
+        int Desencripta(string base64Data, string base64Llave, [MarshalAs(UnmanagedType.BStr)] out string base64Resultado);
+
+        [return: MarshalAs(UnmanagedType.BStr)]
+        string GetID();
+
+        void SetID(string v);
+
+        [return: MarshalAs(UnmanagedType.BStr)]
+        string Version();
     }
 
     /// <summary>
@@ -129,6 +138,23 @@ namespace AES_CBC_PKC7
 
         #endregion
 
+        private string _VERSION_ = "1.0.0.0";
+        static private string _S_VERSION_ = "1.0.0.0";
+
+        public string Version() { return this._VERSION_; }
+
+        public string ID { get; set; }
+
+        public void SetID(string v) { ID = v; }
+
+        public string GetID() { return ID; }
+
+        [DllExport(CallingConvention = CallingConvention.Cdecl)]
+        public static void CreaObjeto([MarshalAs(UnmanagedType.Interface)] out IAES_CBC_PKC7 miAES)
+        {
+            miAES = new AES_CBC_PKC7();
+            miAES.SetID("_UNDEF_");
+        }
         public int Desencripta(string base64Data, string base64Llave, out string base64Resultado)
         {
             int result = -1;
@@ -203,6 +229,12 @@ namespace AES_CBC_PKC7
 
             return result;
 
+        }
+
+        [DllExport("VersionNTS", CallingConvention = CallingConvention.Cdecl)]
+        public static void VersionNTS([MarshalAs(UnmanagedType.BStr)] out string version)
+        {
+            version = _S_VERSION_;
         }
 
         [DllExport("DesencriptaNTS", CallingConvention = CallingConvention.Cdecl)]

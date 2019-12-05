@@ -236,7 +236,6 @@ namespace AES_CTR_NET
         }
 
         [DllExport("VersionNTS", CallingConvention = CallingConvention.Cdecl)]
-
         public static void VersionNTS([MarshalAs(UnmanagedType.BStr)] out string version)
         {
             version = _S_VERSION_;
